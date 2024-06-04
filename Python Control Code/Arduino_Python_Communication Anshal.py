@@ -1,9 +1,13 @@
 import serial
 import time
 import csv
+import numpy
 
 # Configure the serial connection
 ser = serial.Serial('COM6', 115200)
+
+# Initialize array storing accel vectors
+accel_array = []
 
 # Function to send a command to the Arduino
 def send_command(command):
@@ -19,11 +23,13 @@ def wait_for_ready(ser):
             print(response)
             if "READY" in response:
                 break
+            else:
+                accel_array.append(response)
         else:
             time.sleep(0.01)  # Short delay to reduce CPU usage
 
 
-with open('MOTORINPUTS_8_10000.csv', newline='') as csvfile: #create the points row by row
+with open('MOTORINPUTS_64_10000.csv', newline='') as csvfile: #create the points row by row
     read = csv.reader(csvfile) #csv.reader reads row by row
     time.sleep(5)
     for row in read:
@@ -35,3 +41,4 @@ with open('MOTORINPUTS_8_10000.csv', newline='') as csvfile: #create the points 
         # print(inputB)
         # send_command(inputB) #+";" to add semicolon to end of row
         # wait_for_ready(ser)
+    numpy.savetxt("accel_vec.csv",accel_array,delimiter=',')

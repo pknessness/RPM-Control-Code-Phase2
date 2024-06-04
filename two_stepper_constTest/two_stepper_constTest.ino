@@ -16,7 +16,7 @@
 #define enPin 8
 
 // Desired RPM
-const int desiredRPM = 20;
+const int desiredRPM = 10;
 const int stepDelay = (((60/desiredRPM)*1000000)/(BASE_STEPS_PER_REVOLUTION * MICROSTEPPING));
 
 void setup() {
