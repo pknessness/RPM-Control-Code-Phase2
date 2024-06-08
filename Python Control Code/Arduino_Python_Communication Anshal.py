@@ -33,7 +33,7 @@ def wait_for_ready(ser):
             time.sleep(0.01)  # Short delay to reduce CPU usage
 
 
-with open('MOTORINPUTS_64_2000.csv', newline='') as csvfile: #create the points row by row
+with open('MOTORINPUTS_64_10000.csv', newline='') as csvfile: #create the points row by row
     read = csv.reader(csvfile) #csv.reader reads row by row
     time.sleep(5)
     for row in read:
