@@ -11,6 +11,15 @@
 
 #include "AA_MCP2515.h"
 
+struct Motor {
+  uint16_t angle;
+  uint16_t velocity;
+  uint16_t current;
+  uint8_t temp;
+};
+
+void printMotor(Motor m, char c = '?');
+
 // TODO: modify CAN_BITRATE, CAN_PIN_CS(Chip Select) pin, and CAN_PIN_INT(Interrupt) pin as required.
 const CANBitrate::Config CAN_BITRATE = CANBitrate::Config_8MHz_500kbps;
 const uint8_t CAN_PIN_CS = 53;
@@ -29,6 +38,11 @@ uint8_t reverseA = 0;
 
 uint16_t angleB = 0;
 uint8_t reverseB = 0;
+
+Motor motorA;
+Motor motorB;
+
+double heading = 0;
 
 String inst;
 
@@ -101,9 +115,14 @@ void loop() {
     CANFrame frameA(0x141, dataA, sizeof(dataA));
     CAN.write(frameA);
     frameA.print("CAN _A_ TX");
-
     if (CAN.read(frameA) == CANController::IOResult::OK) {
       frameA.print("_A_ RX");
+      frameA.getData(dataA,8);
+      motorA.angle = dataA[6] | (dataA[7]<<8);
+      motorA.velocity = dataA[4] | (dataA[5]<<8);
+      motorA.current = dataA[2] | (dataA[3]<<8);
+      motorA.temp = dataA[1];
+      printMotor(motorA);
     }
 
     // transmit B
@@ -123,4 +142,19 @@ void loop() {
   
 
   delay(1);
+}
+
+// void returnFrame(CANFrame frame){
+//   print
+// }
+
+void printMotor(Motor m, char c = '?'){
+  Serial.print("Motor ");
+  Serial.print(c);
+  Serial.print("| Angle: ");
+  Serial.print(m.angle);
+  Serial.print("| Velocity");
+  Serial.print(m.velocity);
+  Serial.print("| Temp");
+  Serial.println(m.temp);
 }

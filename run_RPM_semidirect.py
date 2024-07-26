@@ -7,7 +7,8 @@ import numpy
 ser = serial.Serial('COM10', 115200)
 f = open("demofile2.txt", "a")
 
-motor1 = {""}
+motor1 = {"angle":0,"velocity":0,"torque":0,"temp":0}
+motor2 = {"angle":0,"velocity":0,"torque":0,"temp":0}
 
 # Initialize array storing accel vectors
 accel_array = []
@@ -24,6 +25,8 @@ with open('profiles/MOTORINPUTS_64_10000.csv', newline='') as csvfile: #create t
         inputB = row[1]
         #print(inputA + "," + inputB + ";")
         send("_"+ inputA + "A_" + inputB + "B")
+        print("_"+ inputA + "A_" + inputB + "B")
+        time.sleep(0.3)
         
         # print(inputB)
         # send_command(inputB) #+";" to add semicolon to end of row
