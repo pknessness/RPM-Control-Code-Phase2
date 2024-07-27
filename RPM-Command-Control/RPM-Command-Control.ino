@@ -8,6 +8,11 @@
   MIT License
   https://github.com/codeljo/AA_MCP2515
 */
+#define MAX_VELO_RPM 10
+#define ACCEL_RAD_S_S 0.2
+#define DT_MS 300
+#define ANGLE_OF_ATTACK 15
+#define SEED 2132138
 
 #include "AA_MCP2515.h"
 
@@ -19,6 +24,8 @@ struct Motor {
 };
 
 void printMotor(Motor m, char c = '?');
+Motor setVelocity(uint16_t canID, int32_t velocity_dps_hundreth);
+Motor setAngle(uint16_t canID, int16_t velocity_dps, int16_t angle_deg_hundreth);
 
 // TODO: modify CAN_BITRATE, CAN_PIN_CS(Chip Select) pin, and CAN_PIN_INT(Interrupt) pin as required.
 const CANBitrate::Config CAN_BITRATE = CANBitrate::Config_8MHz_500kbps;
@@ -30,7 +37,7 @@ CANController CAN(config);
 
 // uint8_t data[] = { 0xA4, 0x00, 0x3C, 0x00, 0xA0, 0x8C, 0x00, 0x00 };
 
-uint8_t controlCode = 0xA6;
+uint8_t controlCode = 0xA2;
 uint16_t maxSpeed = 100;
 
 uint16_t angleA = 0;
@@ -60,16 +67,18 @@ void setup() {
     delay(1000);
   }
   Serial.println("CAN begin OK");
+
+  randomSeed(SEED);
 }
 
 void loop() {
 
   if(Serial.available()){
     char inChar = Serial.read();
-    Serial.println("--");
-    Serial.println(inChar);
-    Serial.println((int)inChar);
-    Serial.println("--");
+    // Serial.println("--");
+    // Serial.println(inChar);
+    // Serial.println((int)inChar);
+    // Serial.println("--");
     if(inChar >= 48 && inChar <= 57){
       inst += inChar;
     }else if(inChar == 'q'){
@@ -78,57 +87,16 @@ void loop() {
       reverseB = !reverseB;
     }else if(inChar == endCharA){
       angleA = atoi(inst.c_str());
-      // Serial.print("new angleA: ");
-      // Serial.println(angleA);
 
-      uint8_t dataA[8] = { 
-        controlCode, 
-        reverseA, (uint8_t)maxSpeed, 
-        (uint8_t)(maxSpeed>>8), 
-        (uint8_t)(angleA), 
-        (uint8_t)(angleA>>8), 
-        0x00, 
-        0x00};
-
-      // transmit A
-      CANFrame frameA(0x141, dataA, sizeof(dataA));
-      CAN.write(frameA);
-      // frameA.print("CAN _A_ TX");
-      if (CAN.read(frameA) == CANController::IOResult::OK) {
-        // frameA.print("_A_ RX");
-        frameA.getData(dataA,8);
-        motorA.angle = dataA[6] | (dataA[7]<<8);
-        motorA.velocity = dataA[4] | (dataA[5]<<8);
-        motorA.current = dataA[2] | (dataA[3]<<8);
-        motorA.temp = dataA[1];
-      }
+      Serial.print("new angle: ");
+      Serial.println(angleA);
+      setVelocity(0x141, angleA);
 
       inst = "";
     }else if(inChar == endCharB){
       angleB = atoi(inst.c_str());
       // Serial.print("new angleB: ");
       // Serial.println(angleB);
-
-      uint8_t dataB[8] = { 
-      controlCode, 
-      reverseB, (uint8_t)maxSpeed, 
-      (uint8_t)(maxSpeed>>8), 
-      (uint8_t)(angleB), 
-      (uint8_t)(angleB>>8), 
-      0x00, 
-      0x00};
-      // transmit B
-      CANFrame frameB(0x142, dataB, sizeof(dataB));
-      CAN.write(frameB);
-      // frameB.print("_B_ CAN TX");
-      if (CAN.read(frameB) == CANController::IOResult::OK) {
-        // frameB.print("_B_ RX");
-        frameB.getData(dataB,8);
-        motorB.angle = dataB[6] | (dataB[7]<<8);
-        motorB.velocity = dataB[4] | (dataB[5]<<8);
-        motorB.current = dataB[2] | (dataB[3]<<8);
-        motorB.temp = dataB[1];
-      }
 
       inst = "";
     }else if(inChar == purge){
@@ -138,37 +106,7 @@ void loop() {
   }
 
   if(innerLoopCount > 200){
-    uint8_t result[8] = {0,0,0,0,0,0,0,0};
-    uint8_t data[8] = { 
-      0x94, 
-      0x00, 
-      0x00, 
-      0x00, 
-      0x00, 
-      0x00, 
-      0x00, 
-      0x00};
-
-    // transmit A
-    CANFrame frame(0x141, data, sizeof(data));
-    CAN.write(frame);
-
-    if (CAN.read(frame) == CANController::IOResult::OK) {
-      frame.print("_A_ RX");
-      frame.getData(result, 8);
-      motorA.angle = result[6] | (result[7]<<8); 
-    }
-
-    CANFrame frame2(0x142, data, sizeof(data));
-    CAN.write(frame2);
-
-    if (CAN.read(frame2) == CANController::IOResult::OK) {
-      // frameB.print("_B_ RX");
-      frame2.getData(result, 8);
-      motorB.angle = result[6] | (result[7]<<8); 
-    }
     
-    printMotor(motorA);
     innerLoopCount = 0;
   }
   innerLoopCount ++;
@@ -190,4 +128,41 @@ void printMotor(Motor m, char c = '?'){
   Serial.print(m.velocity);
   Serial.print("| Temp");
   Serial.println(m.temp);
+}
+
+Motor setVelocity(uint16_t canID, int32_t velocity_dps_hundreth){
+    // uint8_t data[8] = { 
+    //     0xA2, 
+    //     0x00, 
+    //     0x00, 
+    //     0x00, 
+    //     (uint8_t)(velocity_dps_hundreth), 
+    //     (uint8_t)(velocity_dps_hundreth>>8), 
+    //     (uint8_t)(velocity_dps_hundreth>>16), 
+    //     (uint8_t)(velocity_dps_hundreth>>24)};
+
+    uint8_t data[8] = {0xA2, 0x00, 0x00, 0x00, 0x10, 0x27, 0x00, 0x00};
+
+    Motor mot;
+    CANFrame frame(canID, data, sizeof(data));
+    frame.print("TX");
+    CAN.write(frame);
+
+    if (CAN.read(frame) == CANController::IOResult::OK) {
+        frame.getData(data, 8);
+        if(data[0] == 0xA2){
+            mot.angle = data[6] | (data[7]<<8); 
+            mot.velocity = data[4] | (data[5]<<8);
+            mot.current = data[2] | (data[3]<<8);
+            mot.temp = data[1];
+        }else{
+            frame.print("WUT");
+        }
+    }
+    return mot;
+}
+
+Motor setAngle(uint16_t canID, int16_t velocity_dps, int16_t angle_deg_hundreth){
+    Motor mot;
+    return mot;
 }
