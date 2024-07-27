@@ -78,31 +78,38 @@ void loop() {
       reverseB = !reverseB;
     }else if(inChar == endCharA){
       angleA = atoi(inst.c_str());
-      Serial.print("new angleA: ");
-      Serial.println(angleA);
+      // Serial.print("new angleA: ");
+      // Serial.println(angleA);
+
+      uint8_t dataA[8] = { 
+        controlCode, 
+        reverseA, (uint8_t)maxSpeed, 
+        (uint8_t)(maxSpeed>>8), 
+        (uint8_t)(angleA), 
+        (uint8_t)(angleA>>8), 
+        0x00, 
+        0x00};
+
+      // transmit A
+      CANFrame frameA(0x141, dataA, sizeof(dataA));
+      CAN.write(frameA);
+      // frameA.print("CAN _A_ TX");
+      if (CAN.read(frameA) == CANController::IOResult::OK) {
+        // frameA.print("_A_ RX");
+        frameA.getData(dataA,8);
+        motorA.angle = dataA[6] | (dataA[7]<<8);
+        motorA.velocity = dataA[4] | (dataA[5]<<8);
+        motorA.current = dataA[2] | (dataA[3]<<8);
+        motorA.temp = dataA[1];
+      }
+
       inst = "";
     }else if(inChar == endCharB){
       angleB = atoi(inst.c_str());
-      Serial.print("new angleB: ");
-      Serial.println(angleB);
-      inst = "";
-    }else if(inChar == purge){
-      inst = "";
-    }
-  }
+      // Serial.print("new angleB: ");
+      // Serial.println(angleB);
 
-  if(innerLoopCount > 200){
-
-    uint8_t dataA[8] = { 
-      controlCode, 
-      reverseA, (uint8_t)maxSpeed, 
-      (uint8_t)(maxSpeed>>8), 
-      (uint8_t)(angleA), 
-      (uint8_t)(angleA>>8), 
-      0x00, 
-      0x00};
-
-    uint8_t dataB[8] = { 
+      uint8_t dataB[8] = { 
       controlCode, 
       reverseB, (uint8_t)maxSpeed, 
       (uint8_t)(maxSpeed>>8), 
@@ -110,32 +117,58 @@ void loop() {
       (uint8_t)(angleB>>8), 
       0x00, 
       0x00};
+      // transmit B
+      CANFrame frameB(0x142, dataB, sizeof(dataB));
+      CAN.write(frameB);
+      // frameB.print("_B_ CAN TX");
+      if (CAN.read(frameB) == CANController::IOResult::OK) {
+        // frameB.print("_B_ RX");
+        frameB.getData(dataB,8);
+        motorB.angle = dataB[6] | (dataB[7]<<8);
+        motorB.velocity = dataB[4] | (dataB[5]<<8);
+        motorB.current = dataB[2] | (dataB[3]<<8);
+        motorB.temp = dataB[1];
+      }
+
+      inst = "";
+    }else if(inChar == purge){
+      inst = "";
+    }
+    
+  }
+
+  if(innerLoopCount > 200){
+    uint8_t result[8] = {0,0,0,0,0,0,0,0};
+    uint8_t data[8] = { 
+      0x94, 
+      0x00, 
+      0x00, 
+      0x00, 
+      0x00, 
+      0x00, 
+      0x00, 
+      0x00};
 
     // transmit A
-    CANFrame frameA(0x141, dataA, sizeof(dataA));
-    CAN.write(frameA);
-    frameA.print("CAN _A_ TX");
-    if (CAN.read(frameA) == CANController::IOResult::OK) {
-      frameA.print("_A_ RX");
-      frameA.getData(dataA,8);
-      motorA.angle = dataA[6] | (dataA[7]<<8);
-      motorA.velocity = dataA[4] | (dataA[5]<<8);
-      motorA.current = dataA[2] | (dataA[3]<<8);
-      motorA.temp = dataA[1];
-      printMotor(motorA);
+    CANFrame frame(0x141, data, sizeof(data));
+    CAN.write(frame);
+
+    if (CAN.read(frame) == CANController::IOResult::OK) {
+      frame.print("_A_ RX");
+      frame.getData(result, 8);
+      motorA.angle = result[6] | (result[7]<<8); 
     }
 
-    // transmit B
-    CANFrame frameB(0x142, dataB, sizeof(dataB));
-    CAN.write(frameB);
-    frameB.print("_B_ CAN TX");
-    if (CAN.read(frameB) == CANController::IOResult::OK) {
-      frameB.print("_B_ RX");
+    CANFrame frame2(0x142, data, sizeof(data));
+    CAN.write(frame2);
+
+    if (CAN.read(frame2) == CANController::IOResult::OK) {
+      // frameB.print("_B_ RX");
+      frame2.getData(result, 8);
+      motorB.angle = result[6] | (result[7]<<8); 
     }
-
-    // modify data to simulate updated data from sensor, etc
-    // angleA += 1000;
-
+    
+    printMotor(motorA);
     innerLoopCount = 0;
   }
   innerLoopCount ++;
