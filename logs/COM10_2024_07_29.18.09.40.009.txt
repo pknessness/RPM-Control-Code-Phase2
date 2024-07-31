@@ -1,0 +1,2 @@
+CAN begin OK
+Failed to find LSM6DS3TR-C chip

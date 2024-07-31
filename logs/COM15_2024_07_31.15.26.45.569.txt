@@ -1,0 +1,346 @@
+CAN begin OK
+LSM6DS3TR-C Found!
+Accelerometer range set to: +-2G
+Accelerometer data rate set to: 12.5 Hz
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [2.84] [-8.69] [-3.89] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [2.88] [-9.41] [-1.28] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [2.88] [-9.47] [-0.79] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [2.88] [-9.46] [-0.98] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [2.88] [-9.46] [-0.97] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [2.88] [-9.46] [-0.97] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [2.88] [-9.46] [-0.98] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [1.87] [-9.65] [-0.99] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-2.67] [-9.23] [-0.92] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-3.94] [-8.71] [-0.86] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-6.87] [-6.45] [-0.65] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-8.26] [-4.40] [-0.51] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-9.06] [-2.20] [-0.28] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-9.25] [1.02] [0.24] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-8.76] [3.16] [0.69] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-7.19] [5.94] [1.17] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-5.23] [7.79] [1.51] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-2.50] [9.14] [1.75] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [0.45] [9.62] [1.83] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [3.51] [9.17] [1.71] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [6.52] [7.65] [1.39] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [8.49] [5.70] [0.99] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [9.92] [2.94] [0.44] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [10.37] [0.17] [-0.10] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [9.96] [-2.69] [-0.64] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [8.70] [-5.31] [-1.13] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [6.90] [-7.29] [-1.48] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [4.52] [-8.77] [-1.73] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [2.03] [-9.51] [-1.83] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.94] [-9.53] [-1.81] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-3.39] [-8.85] [-1.67] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-5.98] [-7.25] [-1.35] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-7.66] [-5.37] [-0.98] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-8.93] [-2.70] [-0.47] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-9.31] [0.02] [0.04] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-8.96] [2.51] [0.52] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-7.72] [5.24] [1.03] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-5.89] [7.28] [1.42] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-3.34] [8.83] [1.70] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.50] [9.56] [1.83] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [2.75] [8.43] [-4.50] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [5.56] [-5.91] [-6.00] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [8.07] [-5.17] [3.53] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [9.42] [0.32] [4.20] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [10.37] [0.75] [0.11] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [10.23] [-1.49] [0.79] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [9.25] [-1.07] [4.44] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [7.54] [2.13] [6.57] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [5.39] [6.00] [6.08] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [2.60] [8.52] [4.35] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [0.08] [9.61] [1.82] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.62] [9.63] [1.35] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.04] [9.56] [1.45] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.02] [9.45] [2.03] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.99] [8.89] [3.81] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.89] [5.66] [7.87] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.78] [2.02] [9.52] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.68] [-2.19] [9.50] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.61] [-5.98] [7.70] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.57] [-8.44] [4.86] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.57] [-9.67] [1.10] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.61] [-9.40] [-2.59] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.63] [-8.75] [-4.28] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.59] [-9.64] [-1.25] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.57] [-9.68] [0.73] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.58] [-9.74] [-0.35] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.60] [-9.53] [-2.06] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.65] [-8.37] [-4.98] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.74] [-5.77] [-7.85] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.85] [-1.71] [-9.59] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.95] [2.58] [-9.38] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-1.03] [6.51] [-7.22] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-1.06] [9.24] [-2.95] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-1.03] [9.50] [1.73] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.94] [7.48] [6.13] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.85] [4.29] [8.71] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.73] [0.02] [9.74] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.65] [-3.69] [9.02] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.59] [-7.13] [6.64] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.57] [-9.07] [3.51] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.58] [-9.74] [-0.49] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.63] [-8.89] [-4.00] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.71] [-6.75] [-7.03] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.79] [-3.81] [-8.96] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.89] [0.27] [-9.73] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-1.00] [4.88] [-8.42] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-1.05] [8.14] [-5.28] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-1.05] [9.65] [-0.44] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.99] [8.80] [4.00] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.89] [5.93] [7.67] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.79] [2.22] [9.47] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.69] [-2.09] [9.52] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.61] [-5.56] [8.00] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.57] [-8.39] [4.95] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.57] [-9.66] [1.19] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.61] [-9.43] [-2.48] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.68] [-7.66] [-6.02] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.77] [-4.78] [-8.49] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.87] [-0.86] [-9.70] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.98] [3.88] [-8.92] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-1.05] [7.76] [-5.82] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-1.05] [9.64] [-0.62] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.98] [8.51] [4.58] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.88] [5.53] [7.97] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.76] [1.01] [9.68] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.65] [-3.66] [9.03] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.58] [-7.91] [5.69] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.57] [-9.68] [1.04] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.63] [-8.90] [-4.29] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.75] [-5.30] [-8.16] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.90] [0.23] [-9.74] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.02] [5.97] [-7.67] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.06] [9.41] [-2.24] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.99] [8.78] [4.03] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.90] [5.96] [7.65] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.79] [1.94] [9.54] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.69] [-2.01] [9.54] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.61] [-5.83] [7.81] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.57] [-8.56] [4.65] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.57] [-9.65] [1.20] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.62] [-9.33] [-2.77] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.68] [-7.68] [-6.00] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.78] [-4.41] [-8.68] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.89] [0.01] [-9.74] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.99] [4.24] [-8.75] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.05] [8.03] [-5.46] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.06] [9.62] [-1.11] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.00] [8.88] [3.79] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.91] [6.43] [7.25] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.80] [2.49] [9.40] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.69] [-1.82] [9.58] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.62] [-5.38] [8.12] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.57] [-8.27] [5.14] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.57] [-9.58] [1.78] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.60] [-9.49] [-2.23] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.66] [-8.07] [-5.46] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.77] [-5.04] [-8.34] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.87] [-0.74] [-9.71] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.97] [3.55] [-9.06] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.05] [7.57] [-6.07] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.06] [9.50] [-1.82] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.01] [9.12] [3.19] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.93] [6.89] [6.81] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.81] [3.13] [9.20] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.71] [-1.20] [9.66] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.63] [-4.91] [8.42] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.59] [-7.96] [5.62] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.57] [-9.47] [2.31] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.60] [-9.61] [-1.63] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.66] [-8.16] [-5.31] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.74] [-5.54] [-8.00] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.86] [-1.35] [-9.64] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.96] [2.97] [-9.27] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.04] [7.12] [-6.61] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.06] [9.34] [-2.51] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.02] [9.32] [2.57] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.94] [7.29] [6.37] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.83] [3.65] [9.01] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.72] [-0.65] [9.73] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.64] [-4.43] [8.69] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.58] [-7.63] [6.07] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.57] [-9.32] [2.85] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.59] [-9.67] [-1.04] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.65] [-8.45] [-4.83] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.74] [-5.96] [-7.71] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.84] [-1.95] [-9.54] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.95] [2.31] [-9.46] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.03] [6.63] [-7.11] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.06] [9.14] [-3.23] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.03] [9.46] [1.91] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.95] [7.69] [5.86] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.85] [4.19] [8.76] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.74] [-0.10] [9.74] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.65] [-3.88] [8.94] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.59] [-7.25] [6.51] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.57] [-9.08] [3.48] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.59] [-9.72] [-0.48] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.64] [-8.70] [-4.36] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.72] [-6.41] [-7.33] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.83] [-2.53] [-9.41] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.92] [1.67] [-9.59] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.02] [6.08] [-7.59] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.06] [8.86] [-3.94] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.03] [9.60] [1.11] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.97] [8.15] [5.23] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.87] [4.83] [8.42] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.75] [0.59] [9.71] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.66] [-3.20] [9.20] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.60] [-6.77] [7.00] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.57] [-8.87] [4.01] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.59] [-9.75] [0.06] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.63] [-8.94] [-3.89] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.71] [-6.84] [-6.93] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.81] [-3.16] [-9.20] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.92] [1.02] [-9.69] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.02] [5.57] [-7.97] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.06] [8.78] [-4.13] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-1.05] [9.67] [0.43] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.98] [8.23] [5.09] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.88] [5.34] [8.10] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.76] [1.20] [9.66] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.66] [-3.02] [9.28] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.61] [-6.33] [7.40] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.57] [-8.81] [4.14] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.58] [-9.73] [0.55] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.63] [-9.13] [-3.42] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.70] [-7.20] [-6.56] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.80] [-3.71] [-9.00] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.91] [0.81] [-9.70] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.01] [5.40] [-8.09] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-1.05] [8.47] [-4.72] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-1.04] [9.67] [0.21] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.99] [8.56] [4.52] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.89] [5.51] [8.00] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.77] [1.44] [9.63] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.68] [-2.47] [9.43] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.61] [-6.22] [7.50] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+[Immediate] [-0.57] [-8.59] [4.60] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.58] [-9.72] [0.73] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.62] [-9.30] [-2.86] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.69] [-7.34] [-6.40] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
+WUT id:0x241 dlc:8 remote:0 extended:0 data:0xF1 0x0 0x0 0x0 0x0 0x0 0x0 0x0 
+[Immediate] [-0.79] [-3.92] [-8.91] [Integral G] X:0.00 Y:0.00 Z:0.00 | PC:0
