@@ -20,6 +20,17 @@
 #include "AA_MCP2515.h"
 #include <Adafruit_LSM6DS3TRC.h>
 
+#define TIMING_CYCLE 100
+#define TIMING_TOLERANCE 10
+
+#define SERIAL_TIMING 0
+#define COMMAND_TIMING 20
+#define QUERY_TIMING 40
+#define IMU_TIMING 60
+#define PRINT_TIMING 80
+
+#define DT_CYCLES DT_MS/TIMING_CYCLE
+
 Adafruit_LSM6DS3TRC lsm6ds3trc;
 
 struct Motor {
@@ -46,14 +57,12 @@ const float xOffset = 0.6; //-9.89 9.77
 const float yOffset = 0.295; //-10.09 9.50
 const float zOffset = -0.325; //-9.50 10.15
 
-float integralX = 0;
-float integralY = 0;
-float integralZ = 0;
+float accelX = 0;
+float accelY = 0;
+float accelZ = 0;
 
 CANConfig config(CAN_BITRATE, CAN_PIN_CS, CAN_PIN_INT);
 CANController CAN(config);
-
-// uint8_t data[] = { 0xA4, 0x00, 0x3C, 0x00, 0xA0, 0x8C, 0x00, 0x00 };
 
 Motor motorA;
 Motor motorB;
@@ -62,10 +71,10 @@ Motor motors[2] = {motorA, motorB};
 
 double heading = 0;
 
-String inst;
+// String inst;
 
-int innerLoopCount = 0;
-int innerLoopCount2 = 0;
+int commandLoop = 0;
+int printLoopCount = 0;
 
 const char endCharA = 'A';
 const char endCharB = 'B';
@@ -82,8 +91,10 @@ sensors_event_t accel;
 sensors_event_t gyro;
 sensors_event_t temp;
 
-bool querySent = 0;
+bool serialRead = 0;
 bool commandSent = 0;
+bool querySent = 0;
+bool imuRecv = 0;
 bool printSent = 0;
 
 void setup() {
@@ -109,62 +120,10 @@ void setup() {
   resetMotor(0x141);
   resetMotor(0x142);
 
-  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(7, OUTPUT);
 
   lsm6ds3trc.setAccelRange(LSM6DS_ACCEL_RANGE_2_G);
-  Serial.print("Accelerometer range set to: ");
-  switch (lsm6ds3trc.getAccelRange()) {
-  case LSM6DS_ACCEL_RANGE_2_G:
-    Serial.println("+-2G");
-    break;
-  case LSM6DS_ACCEL_RANGE_4_G:
-    Serial.println("+-4G");
-    break;
-  case LSM6DS_ACCEL_RANGE_8_G:
-    Serial.println("+-8G");
-    break;
-  case LSM6DS_ACCEL_RANGE_16_G:
-    Serial.println("+-16G");
-    break;
-  }
-
   lsm6ds3trc.setAccelDataRate(LSM6DS_RATE_12_5_HZ);
-  Serial.print("Accelerometer data rate set to: ");
-  switch (lsm6ds3trc.getAccelDataRate()) {
-  case LSM6DS_RATE_SHUTDOWN:
-    Serial.println("0 Hz");
-    break;
-  case LSM6DS_RATE_12_5_HZ:
-    Serial.println("12.5 Hz");
-    break;
-  case LSM6DS_RATE_26_HZ:
-    Serial.println("26 Hz");
-    break;
-  case LSM6DS_RATE_52_HZ:
-    Serial.println("52 Hz");
-    break;
-  case LSM6DS_RATE_104_HZ:
-    Serial.println("104 Hz");
-    break;
-  case LSM6DS_RATE_208_HZ:
-    Serial.println("208 Hz");
-    break;
-  case LSM6DS_RATE_416_HZ:
-    Serial.println("416 Hz");
-    break;
-  case LSM6DS_RATE_833_HZ:
-    Serial.println("833 Hz");
-    break;
-  case LSM6DS_RATE_1_66K_HZ:
-    Serial.println("1.66 KHz");
-    break;
-  case LSM6DS_RATE_3_33K_HZ:
-    Serial.println("3.33 KHz");
-    break;
-  case LSM6DS_RATE_6_66K_HZ:
-    Serial.println("6.66 KHz");
-    break;
-  }
 
   // lsm6ds3trc.configInt1(false, false, true); // accelerometer DRDY on INT1
   // lsm6ds3trc.configInt2(false, true, false); // gyro DRDY on INT2
@@ -175,148 +134,171 @@ void setup() {
 
 void loop() {
   
-  #if EN_IMU
-    // Serial.print(",");
-    lsm6ds3trc.getEvent(&accel, &gyro, &temp);
-    // lsm6ds3trc.readAcceleration(gotX,gotY,gotZ);
-    // Serial.print(";");
-  #endif
+  long time = millis();
+  int cyclePosition = time%TIMING_CYCLE;
 
-  if(Serial.available()){
-    char inChar = Serial.read();
-    // Serial.println("--");
-    // Serial.println(inChar);
-    // Serial.println((int)inChar);
-    // Serial.println("--");
-    if(inChar >= 48 && inChar <= 57){
-      inst += inChar;
-    }else if(inChar == 'p'){
-      mode = 'p';
-      resetMotor(0x141);
-      resetMotor(0x142);
-      // setCurrent(0x141,0);
-      // setCurrent(0x142,0);
-    }else if(inChar == 'a'){
-      mode = 'a';
-      resetMotor(0x141);
-      resetMotor(0x142);
-      // setCurrent(0x141,0);
-      // setCurrent(0x142,0);
+  if(cyclePosition > SERIAL_TIMING && cyclePosition <= SERIAL_TIMING + TIMING_TOLERANCE){
+    if(Serial.available()){
+      char inChar = Serial.read();
+      // Serial.println("--");
+      // Serial.println(inChar);
+      // Serial.println((int)inChar);
+      // Serial.println("--");
+      if(inChar >= 48 && inChar <= 57){
+        // inst += inChar;
+      }else if(inChar == 'p'){
+        mode = 'p';
+        resetMotor(0x141);
+        resetMotor(0x142);
+        // setCurrent(0x141,0);
+        // setCurrent(0x142,0);
+      }else if(inChar == 'a'){
+        mode = 'a';
+        resetMotor(0x141);
+        resetMotor(0x142);
+        // setCurrent(0x141,0);
+        // setCurrent(0x142,0);
 
-      integralX = 0;
-      integralY = 0;
-      integralZ = 0;
-    }else if(inChar == 'v'){
-      mode = 'v';
-      resetMotor(0x141);
-      resetMotor(0x142);
-      // setCurrent(0x141,0);
-      // setCurrent(0x142,0);
-    }else if(inChar == 'r'){
-      mode = ' ';
-      resetMotor(0x141);
-      resetMotor(0x142);
-      // setCurrent(0x141,0);
-      // setCurrent(0x142,0);
-    }else if(mode == 'p' && inChar == endCharA){
-      valueA = atof(inst.c_str());
-      setAngleSingle(0x141,MAX_VELO_RPM,(int16_t)(valueA*100));
-      inst = "";
-    }else if(mode == 'p' && inChar == endCharB){
-      valueB = atof(inst.c_str());
-      setAngleSingle(0x142,MAX_VELO_RPM,(int16_t)(valueB*100));
-      inst = "";
-    }else if(mode == 'v' && inChar == endCharA){
-      valueA = atof(inst.c_str());
-      setVelocity(0x141,(int32_t)(valueA*100));
-      inst = "";
-    }else if(mode == 'v' && inChar == endCharB){
-      valueB = atof(inst.c_str());
-      setVelocity(0x142,(int32_t)(valueB*100));
-      inst = "";
-    }else if(inChar == purge){
-      inst = "";
+        accelX = 0;
+        accelY = 0;
+        accelZ = 0;
+      }else if(inChar == 'v'){
+        mode = 'v';
+        resetMotor(0x141);
+        resetMotor(0x142);
+        // setCurrent(0x141,0);
+        // setCurrent(0x142,0);
+      }else if(inChar == 'r'){
+        mode = ' ';
+        resetMotor(0x141);
+        resetMotor(0x142);
+        // setCurrent(0x141,0);
+        // setCurrent(0x142,0);
+      }else if(mode == 'p' && inChar == endCharA){
+        // valueA = atof(inst.c_str());
+        // setAngleSingle(0x141,MAX_VELO_RPM,(int16_t)(valueA*100));
+        // inst = "";
+      }else if(mode == 'p' && inChar == endCharB){
+        // valueB = atof(inst.c_str());
+        // setAngleSingle(0x142,MAX_VELO_RPM,(int16_t)(valueB*100));
+        // inst = "";
+      }else if(mode == 'v' && inChar == endCharA){
+        // valueA = atof(inst.c_str());
+        // setVelocity(0x141,(int32_t)(valueA*100));
+        // inst = "";
+      }else if(mode == 'v' && inChar == endCharB){
+        // valueB = atof(inst.c_str());
+        // setVelocity(0x142,(int32_t)(valueB*100));
+        // inst = "";
+      }else if(inChar == purge){
+        // inst = "";
+      }else if(inChar == 'd'){
+        Serial.print("+");
+        Serial.print(accelX);
+        Serial.print("=");
+        Serial.print(accelY);
+        Serial.print("=");
+        Serial.print(accelZ);
+        Serial.print("=");
+        Serial.print(motors[0].encoder);
+        Serial.print("=");
+        Serial.print(motors[1].encoder);
+        Serial.print("=");
+      }
     }
-    
-  }
+  }else if(cyclePosition > COMMAND_TIMING && cyclePosition <= COMMAND_TIMING + TIMING_TOLERANCE){
+    if(!commandSent){
+      if(mode == 'a'){
+        if(commandLoop > DT_CYCLES){
+          heading += (random(65536)/65536.0) * ANGLE_OF_ATTACK - (ANGLE_OF_ATTACK/2);
+          double heading_rad = heading * 3.14159 / 180;
+          setVelocity(0x141,(int32_t)(sin(heading_rad)*MAX_VELO_RPM * 6 * 100));
+          setVelocity(0x142,(int32_t)(cos(heading_rad)*MAX_VELO_RPM * 6 * 100));
+          // printMotor(motorA,'a');
+          // printMotor(motorB,'b');
+          commandLoop = 0;
+          pointCount ++;
+          digitalWrite(7, HIGH);
+        }else{
+          queryMotor(0x141);
+          queryMotor(0x142);
+          digitalWrite(7, LOW);
+        }
+        commandLoop ++;
 
-  #if EN_CAN
-    if(mode == 'a'){
-      if(innerLoopCount > DT_MS){
-        heading += (random(65536)/65536.0) * ANGLE_OF_ATTACK + (ANGLE_OF_ATTACK/2);
-        double heading_rad = heading * 3.14159 / 180;
-        setVelocity(0x141,(int32_t)(sin(heading_rad)*MAX_VELO_RPM * 6 * 100));
-        setVelocity(0x142,(int32_t)(cos(heading_rad)*MAX_VELO_RPM * 6 * 100));
-        // printMotor(motorA,'a');
-        // printMotor(motorB,'b');
-        innerLoopCount = 0;
-        pointCount ++;
-        // digitalWrite(LED_BUILTIN, HIGH);
       }else{
         queryMotor(0x141);
         queryMotor(0x142);
-        // digitalWrite(LED_BUILTIN, LOW);
       }
-      innerLoopCount ++;
-
-    }else{
-      queryMotor(0x141);
-      queryMotor(0x142);
+      commandSent = 1;
     }
-  #endif
+  }else if(cyclePosition > QUERY_TIMING && cyclePosition <= QUERY_TIMING + TIMING_TOLERANCE){
+    if(!querySent){
+      queryMotorEncoder(0x141);
+      queryMotorEncoder(0x142);
+      querySent = 1;
+    }
+  }else if(cyclePosition > IMU_TIMING && cyclePosition <= IMU_TIMING + TIMING_TOLERANCE){
+    #if EN_IMU
+    if(!imuRecv){
+      lsm6ds3trc.getEvent(&accel, &gyro, &temp);
+      if(mode == 'a'){
+        accelX = accel.acceleration.x + xOffset;
+        accelY = accel.acceleration.y + yOffset;
+        accelZ = accel.acceleration.z + zOffset;
+      }
+      imuRecv = 1;
+    }
+    #endif
+  }else if(cyclePosition > PRINT_TIMING && cyclePosition <= PRINT_TIMING + TIMING_TOLERANCE){
+    if(!printSent){
+      if(printLoopCount > 1){
+
+        double heading_rad = heading * 3.14159 / 180;
+        // Serial.print("Heading:");
+        // Serial.print(heading_rad);
+        // Serial.print(" A Des:[");
+        // Serial.print(sin(heading_rad)*MAX_VELO_RPM);
+        // Serial.print("] Act:[");
+        // Serial.print(motors[0].velocity/10.0);
+        // Serial.print("] B Des:");
+        // Serial.print(cos(heading_rad)*MAX_VELO_RPM);
+        // Serial.print("] Act:[");
+        // Serial.print(motors[1].velocity/10.0);
+
+        // Serial.print("[Immediate] [");
+        // Serial.print(accel.acceleration.x + xOffset);
+        // Serial.print("] [");
+        // Serial.print(accel.acceleration.y + yOffset);
+        // Serial.print("] [");
+        // Serial.print(accel.acceleration.z + zOffset);
+
+        // Serial.print("] [Integral G] X:");
+        // Serial.print(accelX);
+        // Serial.print(" Y:");
+        // Serial.print(accelY);
+        // Serial.print(" Z:");
+        // Serial.print(accelZ);
+
+        // Serial.print(" | PC:");
+        // Serial.println(pointCount);
+
+        printLoopCount = 0;
+      }
+      printLoopCount ++;
+      printSent = 1;
+    }
+  }else{
+    serialRead = 0;
+    commandSent = 0;
+    querySent = 0;
+    imuRecv = 0;
+    printSent = 0;
+  }
 
   getFeedback();
-  delay(1);
-
-  #if EN_IMU
-    if(mode == 'a'){
-      integralX += accel.acceleration.x + xOffset;
-      integralY += accel.acceleration.y + yOffset;
-      integralZ += accel.acceleration.z + zOffset;
-    }
-  #endif
-
-  if(innerLoopCount2 > 100){
-    // Serial.print("Heading:");
-    // Serial.print(heading);
-    // Serial.print(" A Des:[");
-    // Serial.print(sin(heading)*MAX_VELO_RPM);
-    // Serial.print("] Act:[");
-    // Serial.print(motors[0].velocity/100.0);
-    // Serial.print("] B Des:");
-    // Serial.print(cos(heading)*MAX_VELO_RPM);
-    // Serial.print("] Act:[");
-    // Serial.println(motors[1].velocity/100.0);
-
-    Serial.print("[Immediate] [");
-    Serial.print(accel.acceleration.x + xOffset);
-    Serial.print("] [");
-    Serial.print(accel.acceleration.y + yOffset);
-    Serial.print("] [");
-    Serial.print(accel.acceleration.z + zOffset);
-
-    Serial.print("] [Integral G] X:");
-    Serial.print(integralX);
-    Serial.print(" Y:");
-    Serial.print(integralY);
-    Serial.print(" Z:");
-    Serial.print(integralZ);
-
-    Serial.print(" | PC:");
-    Serial.println(pointCount);
-
-    innerLoopCount2 = 0;
-  }
-  innerLoopCount2 ++;
-
-  
-
-  delay(1);
 }
 
-// void returnFrame(CANFrame frame){
-//   print
-// }
 
 void printMotor(Motor m, char c = '?'){
   Serial.print("Motor ");
@@ -380,24 +362,21 @@ void setCurrent(uint16_t canID, int16_t current_hundreth){
     CAN.write(frame);
 }
 
-void queryMotor(uint8_t canID){
-  uint8_t data[8] = { 
-      0x90, 
-      0x00, 
-      0x00, 
-      0x00, 
-      0x00, 
-      0x00, 
-      0x00, 
-      0x00};
-  CANFrame frame(canID, data, sizeof(data));
-  // frame.print("TX");
-  CAN.write(frame);
+void queryMotor(uint16_t canID){
+  sendCommand(canID, 0x9C);
 }
 
-void resetMotor(uint8_t canID){
+void queryMotorEncoder(uint16_t canID){
+  sendCommand(canID, 0x90);
+}
+
+void resetMotor(uint16_t canID){
+  sendCommand(canID, 0x76);
+}
+
+void sendCommand(uint16_t canID, uint8_t command){
   uint8_t data[8] = { 
-      0x76, 
+      command, 
       0x00, 
       0x00, 
       0x00, 
@@ -416,20 +395,24 @@ void getFeedback(){
   while (CAN.read(frame) == CANController::IOResult::OK) {
       frame.getData(data, 8);
       uint16_t id = frame.getId()-0x241;
-      if(data[0] == 0xA1 || data[0] == 0xA2 || data[0] == 0xA6 || data[0] == 0x9C){
-          motors[id].angle = (int16_t)(data[6] | (data[7]<<8)); 
-          motors[id].velocity = (int16_t)(data[4] | (data[5]<<8));
-          motors[id].current = (int16_t)(data[2] | (data[3]<<8));
-          motors[id].temp = data[1];
-          if(data[0] == 0x9C){
-            Serial.println("9C");
-          }
-      }else if(data[0] == 0x90){
-          motors[id].encoder = (int16_t)(data[2] | (data[3]<<8)); 
-          motors[id].encoderRaw = (int16_t)(data[4] | (data[5]<<8));
-          motors[id].encoderOffset = (int16_t)(data[6] | (data[7]<<8));
-      }else{
-          frame.print("WUT");
+      if(id == 0 || id == 1){
+        if(data[0] == 0xA1 || data[0] == 0xA2 || data[0] == 0xA6 || data[0] == 0x9C){
+            motors[id].angle = (int16_t)(data[6] | (data[7]<<8)); 
+            motors[id].velocity = (int16_t)(data[4] | (data[5]<<8));
+            motors[id].current = (int16_t)(data[2] | (data[3]<<8));
+            motors[id].temp = data[1];
+            // if(data[0] == 0x9C){
+            //   Serial.println("9C");
+            // }
+        }else if(data[0] == 0x90){
+            motors[id].encoder = (int16_t)(data[2] | (data[3]<<8)); 
+            motors[id].encoderRaw = (int16_t)(data[4] | (data[5]<<8));
+            motors[id].encoderOffset = (int16_t)(data[6] | (data[7]<<8));
+            // frame.print("90");
+        }else{
+            // frame.print("WUT");
+        }
       }
+      digitalWrite(7,HIGH);
   }
 }

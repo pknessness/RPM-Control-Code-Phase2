@@ -1,0 +1,6 @@
+CAN begin OK
+LSM6DS3TR-C Found!
+CAN begin OK
+LSM6DS3TR-C Found!
+CAN begin OK
+LSM6DS3TR-C Found!
