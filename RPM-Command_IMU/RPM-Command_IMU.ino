@@ -46,6 +46,7 @@ bool printSent = 0;
 
 void setup() {
   Serial.begin(115200);
+  Serial1.begin(115200);
 
   if (!lsm6ds3trc.begin_I2C()) {
     // if (!lsm6ds3trc.begin_SPI(LSM_CS)) {
@@ -73,8 +74,12 @@ void loop() {
   int cyclePosition = time%TIMING_CYCLE;
 
   if(cyclePosition > SERIAL_TIMING && cyclePosition <= SERIAL_TIMING + TIMING_TOLERANCE){
+    if(Serial1.available()){
+      Serial.write(Serial1.read());
+    }
     if(Serial.available()){
       char inChar = Serial.read();
+      Serial1.write(inChar);
       // Serial.println("--");
       // Serial.println(inChar);
       // Serial.println((int)inChar);
