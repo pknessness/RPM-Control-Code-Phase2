@@ -24,9 +24,14 @@
 
 Adafruit_LSM6DS3TRC lsm6ds3trc;
 
-const float xOffset = 0.6; //-9.89 9.77
-const float yOffset = 0.295; //-10.09 9.50
-const float zOffset = -0.325; //-9.50 10.15
+const float xOffset = 0.06+0.253; //-9.89 9.77 
+const float yOffset = 0.295+0.125; //-10.09 9.50
+const float zOffset = -0.325-0.083; //-9.50 10.15
+
+//after alignment it is 
+//-9.85 0.13 -0.02 and 9.84 0.16 -0.02
+//-0.48 9.77 -0.10 and 0.26 -9.80 0.05
+//0.02 0.01 9.81 and -0.05 -0.01 -9.85
 
 float accelX = 0;
 float accelY = 0;
@@ -97,11 +102,20 @@ void loop() {
   }else if(cyclePosition > IMU_TIMING && cyclePosition <= IMU_TIMING + TIMING_TOLERANCE){
     #if EN_IMU
     if(!imuRecv){
-      lsm6ds3trc.getEvent(&accel, &gyro, &temp);
-      accelX = accel.acceleration.x + xOffset;
-      accelY = accel.acceleration.y + yOffset;
-      accelZ = accel.acceleration.z + zOffset;
-      imuRecv = 1;
+      // Serial.print("1");
+      if(!lsm6ds3trc.getEvent(&accel, &gyro, &temp)){
+        Serial.println("DEATH");
+        accelX = 0;
+        accelY = 0;
+        accelZ = 0;
+      }else{
+        // Serial.print("2");
+        accelX = accel.acceleration.x + xOffset;
+        accelY = accel.acceleration.y + yOffset;
+        accelZ = accel.acceleration.z + zOffset;
+        imuRecv = 1;
+      }
+      // Serial.println("3");
     }
     #endif
   }else if(cyclePosition > PRINT_TIMING && cyclePosition <= PRINT_TIMING + TIMING_TOLERANCE){
