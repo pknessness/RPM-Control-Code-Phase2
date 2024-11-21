@@ -1,2 +1,0 @@
-Adafruit LSM6DS3TR-C test!
-Failed to find LSM6DS3TR-C chip

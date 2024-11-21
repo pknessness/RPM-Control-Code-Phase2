@@ -1,2 +1,0 @@
-CAN begin OK
-LSM6DS3TR-C Found!

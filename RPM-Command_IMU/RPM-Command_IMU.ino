@@ -12,6 +12,7 @@
 #define EN_IMU 1
 
 #include <Adafruit_LSM6DS3TRC.h>
+#include <MemoryFree.h>
 
 #define TIMING_CYCLE 100
 #define TIMING_TOLERANCE 10
@@ -65,6 +66,7 @@ void setup() {
   Serial.println("LSM6DS3TR-C Found!");
 
   pinMode(7, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
 
   lsm6ds3trc.setAccelRange(LSM6DS_ACCEL_RANGE_2_G);
   lsm6ds3trc.setAccelDataRate(LSM6DS_RATE_12_5_HZ);
@@ -98,6 +100,10 @@ void loop() {
         Serial.print(accelZ);
         Serial.print("=");
       }
+      else if(inChar == 'm'){
+        Serial.print("freeMemory()=");
+        Serial.println(freeMemory());
+      }
     }
   }else if(cyclePosition > IMU_TIMING && cyclePosition <= IMU_TIMING + TIMING_TOLERANCE){
     #if EN_IMU
@@ -120,6 +126,7 @@ void loop() {
     #endif
   }else if(cyclePosition > PRINT_TIMING && cyclePosition <= PRINT_TIMING + TIMING_TOLERANCE){
     if(!printSent){
+      digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
       if(printLoopCount > 1){
         // Serial.print("[Immediate] [");
         // Serial.print(accel.acceleration.x + xOffset);

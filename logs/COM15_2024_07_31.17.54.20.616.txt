@@ -1,3 +1,0 @@
-CAN begin OK
-LSM6DS3TR-C Found!
-+0.00=0.00=0.00=13030=14726=

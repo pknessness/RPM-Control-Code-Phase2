@@ -1,2 +1,0 @@
-CAN begin FAIL - delaying for 1 second
-CAN begin FAIL - delaying for 1 second

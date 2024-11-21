@@ -1,2 +1,0 @@
-Adafruit LSM6DS33 test!
-Failed to find LSM6DS33 chip
