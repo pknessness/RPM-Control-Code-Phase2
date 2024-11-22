@@ -11,7 +11,8 @@
 
 #define EN_IMU 1
 
-#include <Adafruit_LSM6DS3TRC.h>
+#include <Wire.h>
+#include <SparkFun_KX13X.h>
 #include <MemoryFree.h>
 #include <avr/wdt.h>
 
@@ -24,7 +25,10 @@
 
 #define DT_CYCLES DT_MS/TIMING_CYCLE
 
-Adafruit_LSM6DS3TRC lsm6ds3trc;
+// Adafruit_LSM6DS3TRC lsm6ds3trc;
+SparkFun_KX134 kxAccel;
+
+outputData myData;
 
 const float xOffset = 0.06+0.253; //-9.89 9.77 
 const float yOffset = 0.295+0.125; //-10.09 9.50
@@ -43,32 +47,42 @@ int printLoopCount = 0;
 
 char mode = 'm';
 
-sensors_event_t accel;
-sensors_event_t gyro;
-sensors_event_t temp;
+// sensors_event_t accel;
+// sensors_event_t gyro;
+// sensors_event_t temp;
 
 bool serialRead = 0;
 bool imuRecv = 0;
 bool printSent = 0;
 
 void setup() {
+  Wire.begin();
   Serial.begin(115200);
   Serial1.begin(115200);
 
-  while (!lsm6ds3trc.begin_I2C()) {
+  while (!kxAccel.begin()) {
     // if (!lsm6ds3trc.begin_SPI(LSM_CS)) {
     // if (!lsm6ds3trc.begin_SPI(LSM_CS, LSM_SCK, LSM_MISO, LSM_MOSI)) {
-    Serial.println("Failed to find LSM6DS3TR-C chip");
+    Serial.println("Failed to find KX134 chip");
     delay(1000);
   }
 
-  Serial.println("LSM6DS3TR-C Found!");
+  Serial.println("KX134 Found!");
+
+  if (kxAccel.softwareReset())
+    Serial.println("Reset.");
 
   pinMode(7, OUTPUT);
   pinMode(LED_BUILTIN, OUTPUT);
 
-  lsm6ds3trc.setAccelRange(LSM6DS_ACCEL_RANGE_2_G);
-  lsm6ds3trc.setAccelDataRate(LSM6DS_RATE_12_5_HZ);
+  delay(5);
+  kxAccel.enableAccel(false);
+
+  kxAccel.setRange(SFE_KX132_RANGE2G); // 16g Range
+
+  kxAccel.enableDataEngine(); // Enables the bit that indicates data is ready.
+
+  kxAccel.enableAccel();
 
   wdt_enable(WDTO_1S);
 
@@ -112,17 +126,24 @@ void loop() {
     #if EN_IMU
     if(!imuRecv){
       // Serial.print("1");
-      if(!lsm6ds3trc.getEvent(&accel, &gyro, &temp)){
-        Serial.println("DEATH");
-        accelX = 0;
-        accelY = 0;
-        accelZ = 0;
-      }else{
-        // Serial.print("2");
-        accelX = accel.acceleration.x + xOffset;
-        accelY = accel.acceleration.y + yOffset;
-        accelZ = accel.acceleration.z + zOffset;
-        imuRecv = 1;
+      // if(!lsm6ds3trc.getEvent(&accel, &gyro, &temp)){
+      //   Serial.println("DEATH");
+      //   accelX = 0;
+      //   accelY = 0;
+      //   accelZ = 0;
+      // }else{
+      //   // Serial.print("2");
+      //   accelX = accel.acceleration.x + xOffset;
+      //   accelY = accel.acceleration.y + yOffset;
+      //   accelZ = accel.acceleration.z + zOffset;
+      //   imuRecv = 1;
+      // }
+      if (kxAccel.dataReady())
+      {
+        kxAccel.getAccelData(&myData);
+        accelX = myData.xData;
+        accelY = myData.yData;
+        accelZ = myData.zData;
       }
       // Serial.println("3");
     }
