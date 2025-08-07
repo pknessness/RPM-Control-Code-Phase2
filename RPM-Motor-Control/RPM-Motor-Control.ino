@@ -8,7 +8,7 @@
   MIT License
   https://github.com/codeljo/AA_MCP2515
 */
-#define MAX_VELO_RPM 7
+#define MAX_VELO_RPM 15
 #define ACCEL_RAD_S_S 0.2
 #define DT_MS 300
 #define ANGLE_OF_ATTACK 15
@@ -27,6 +27,18 @@
 #define PRINT_TIMING 80
 
 #define DT_CYCLES DT_MS/TIMING_CYCLE
+
+enum MotorProfile{
+  MOTOR_BOTH_OFF, //0
+  MOTOR_BOTH_RANDOM, //1
+  MOTOR_1_CONSTANT, //2 // for the pig on a stick
+  MOTOR_2_CONSTANT //3
+}; 
+
+MotorProfile currentProfile = MOTOR_BOTH_RANDOM;
+
+void setMotorProfile(MotorProfile profile);
+
 
 struct Motor {
   int16_t angle;
@@ -108,8 +120,25 @@ void loop() {
   int cyclePosition = time%TIMING_CYCLE;
 
   if(cyclePosition > SERIAL_TIMING && cyclePosition <= SERIAL_TIMING + TIMING_TOLERANCE){
-    if(Serial.available()){
+    if(Serial.available() > 0){
       char inChar = Serial.read();
+      switch (inChar) {
+        case '0':
+          setMotorProfile(MOTOR_BOTH_OFF);
+          break;
+        case '1':
+          setMotorProfile(MOTOR_BOTH_RANDOM);
+          break;
+        case '2':
+          setMotorProfile(MOTOR_1_CONSTANT);
+          break;
+        case '3':
+          setMotorProfile(MOTOR_2_CONSTANT);
+          break;
+        default :
+          setMotorProfile(currentProfile);
+          break;
+      }
       // Serial.println("--");
       // Serial.println(inChar);
       // Serial.println((int)inChar);
@@ -170,10 +199,27 @@ void loop() {
     if(!commandSent){
       if(mode == 'a'){
         if(commandLoop > DT_CYCLES){
-          heading += (random(65536)/65536.0) * ANGLE_OF_ATTACK - (ANGLE_OF_ATTACK/2);
-          double heading_rad = heading * 3.14159 / 180;
-          setVelocity(0x141,(int32_t)(sin(heading_rad)*MAX_VELO_RPM * 6 * 100));
-          setVelocity(0x142,(int32_t)(cos(heading_rad)*MAX_VELO_RPM * 6 * 100));
+          // off by default
+          if (currentProfile == MOTOR_BOTH_OFF) {
+            setVelocity(0x141,0);
+            setVelocity(0x142,0);
+          }
+          else if (currentProfile == MOTOR_BOTH_RANDOM) {
+            heading += (random(65536)/65536.0) * ANGLE_OF_ATTACK - (ANGLE_OF_ATTACK/2);
+            double heading_rad = heading * 3.14159 / 180;
+            setVelocity(0x141,(int32_t)(sin(heading_rad)*MAX_VELO_RPM * 6 * 100));
+            setVelocity(0x142,(int32_t)(cos(heading_rad)*MAX_VELO_RPM * 6 * 100));
+          }
+
+          else if (currentProfile == MOTOR_1_CONSTANT) {
+            setVelocity(0x141,MAX_VELO_RPM * 6 * 100);
+            setVelocity(0x142,0);  
+          }
+
+          else if (currentProfile == MOTOR_2_CONSTANT) {
+            setVelocity(0x141,0);
+            setVelocity(0x142,MAX_VELO_RPM * 6 * 100);  
+          }
           // printMotor(motorA,'a');
           // printMotor(motorB,'b');
           commandLoop = 0;
@@ -185,7 +231,6 @@ void loop() {
           digitalWrite(7, LOW);
         }
         commandLoop ++;
-
       }else{
         queryMotor(0x141);
         queryMotor(0x142);
@@ -362,4 +407,8 @@ void getFeedback(){
       }
       digitalWrite(7,HIGH);
   }
+}
+
+void setMotorProfile(MotorProfile profile) {
+  currentProfile = profile;
 }
