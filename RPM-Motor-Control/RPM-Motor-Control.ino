@@ -32,7 +32,7 @@ enum MotorProfile{
   MOTOR_BOTH_OFF, //0
   MOTOR_BOTH_RANDOM, //1
   MOTOR_1_CONSTANT, //2 // for the pig on a stick
-  MOTOR_2_CONSTANT //3
+  MOTOR_BOTH_CONSTANT //3
 }; 
 
 MotorProfile currentProfile = MOTOR_BOTH_RANDOM;
@@ -133,7 +133,7 @@ void loop() {
           setMotorProfile(MOTOR_1_CONSTANT);
           break;
         case '3':
-          setMotorProfile(MOTOR_2_CONSTANT);
+          setMotorProfile(MOTOR_BOTH_CONSTANT);
           break;
         default :
           setMotorProfile(currentProfile);
@@ -216,8 +216,8 @@ void loop() {
             setVelocity(0x142,0);  
           }
 
-          else if (currentProfile == MOTOR_2_CONSTANT) {
-            setVelocity(0x141,0);
+          else if (currentProfile == MOTOR_BOTH_CONSTANT) {
+            setVelocity(0x141,MAX_VELO_RPM * 6 * 100);
             setVelocity(0x142,MAX_VELO_RPM * 6 * 100);  
           }
           // printMotor(motorA,'a');
