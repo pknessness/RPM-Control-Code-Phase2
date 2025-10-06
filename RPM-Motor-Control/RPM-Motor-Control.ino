@@ -220,7 +220,6 @@ void loop() {
           }
 
           else if (currentProfile == MOTOR_IRRATIONAL) {
-            heading += (random(65536)/65536.0) * ANGLE_OF_ATTACK - (ANGLE_OF_ATTACK/2);
             double heading_rad = atan2(3.14159265358979,exp(1));
             setVelocity(0x141,(int32_t)(sin(heading_rad)*MAX_VELO_RPM * 6 * 100));
             setVelocity(0x142,(int32_t)(cos(heading_rad)*MAX_VELO_RPM * 6 * 100));
