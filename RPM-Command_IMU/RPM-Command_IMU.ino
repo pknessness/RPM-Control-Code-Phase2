@@ -12,15 +12,15 @@
 #define EN_IMU 1
 
 #include <Adafruit_LSM6DS3TRC.h>
-#include <MemoryFree.h>
+// #include <MemoryFree.h>
 #include <avr/wdt.h>
 
-#define TIMING_CYCLE 100
-#define TIMING_TOLERANCE 10
+#define TIMING_CYCLE 60
+#define TIMING_TOLERANCE 8
 
 #define SERIAL_TIMING 10
-#define IMU_TIMING 60
-#define PRINT_TIMING 80
+#define IMU_TIMING 40
+#define PRINT_TIMING 50
 
 #define DT_CYCLES DT_MS/TIMING_CYCLE
 
@@ -68,7 +68,8 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 
   lsm6ds3trc.setAccelRange(LSM6DS_ACCEL_RANGE_2_G);
-  lsm6ds3trc.setAccelDataRate(LSM6DS_RATE_12_5_HZ);
+  // lsm6ds3trc.setAccelDataRate(LSM6DS_RATE_12_5_HZ);
+  lsm6ds3trc.setAccelDataRate(LSM6DS_RATE_52_HZ);
 
   wdt_enable(WDTO_1S);
 
@@ -103,10 +104,10 @@ void loop() {
         Serial.print(accelZ);
         Serial.print("=");
       }
-      else if(inChar == 'm'){
-        Serial.print("freeMemory()=");
-        Serial.println(freeMemory());
-      }
+      // else if(inChar == 'm'){
+      //   Serial.print("freeMemory()=");
+      //   Serial.println(freeMemory());
+      // }
     }
   }else if(cyclePosition > IMU_TIMING && cyclePosition <= IMU_TIMING + TIMING_TOLERANCE){
     #if EN_IMU

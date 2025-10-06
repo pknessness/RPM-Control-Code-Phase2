@@ -29,13 +29,14 @@
 #define DT_CYCLES DT_MS/TIMING_CYCLE
 
 enum MotorProfile{
-  MOTOR_BOTH_OFF, //0
-  MOTOR_BOTH_RANDOM, //1
-  MOTOR_1_CONSTANT, //2 // for the pig on a stick
-  MOTOR_BOTH_CONSTANT //3
+  MOTOR_BOTH_OFF, 
+  MOTOR_SIMPLIFIED_RANDOM, 
+  MOTOR_2D, 
+  MOTOR_3D,
+  MOTOR_IRRATIONAL
 }; 
 
-MotorProfile currentProfile = MOTOR_BOTH_RANDOM;
+MotorProfile currentProfile = MOTOR_SIMPLIFIED_RANDOM;
 
 void setMotorProfile(MotorProfile profile);
 
@@ -101,16 +102,10 @@ void setup() {
   }
   Serial.println("CAN begin OK");
 
-  Serial.println("LSM6DS3TR-C Found!");
-
   resetMotor(0x141);
   resetMotor(0x142);
 
   pinMode(7, OUTPUT);
-  // lsm6ds3trc.configInt1(false, false, true); // accelerometer DRDY on INT1
-  // lsm6ds3trc.configInt2(false, true, false); // gyro DRDY on INT2
-
-
   randomSeed(SEED);
 }
 
@@ -127,13 +122,16 @@ void loop() {
           setMotorProfile(MOTOR_BOTH_OFF);
           break;
         case '1':
-          setMotorProfile(MOTOR_BOTH_RANDOM);
+          setMotorProfile(MOTOR_SIMPLIFIED_RANDOM);
           break;
         case '2':
-          setMotorProfile(MOTOR_1_CONSTANT);
+          setMotorProfile(MOTOR_2D);
           break;
         case '3':
-          setMotorProfile(MOTOR_BOTH_CONSTANT);
+          setMotorProfile(MOTOR_3D);
+          break;
+        case '4':
+          setMotorProfile(MOTOR_IRRATIONAL);
           break;
         default :
           setMotorProfile(currentProfile);
@@ -204,21 +202,28 @@ void loop() {
             setVelocity(0x141,0);
             setVelocity(0x142,0);
           }
-          else if (currentProfile == MOTOR_BOTH_RANDOM) {
+          else if (currentProfile == MOTOR_SIMPLIFIED_RANDOM) {
             heading += (random(65536)/65536.0) * ANGLE_OF_ATTACK - (ANGLE_OF_ATTACK/2);
             double heading_rad = heading * 3.14159 / 180;
             setVelocity(0x141,(int32_t)(sin(heading_rad)*MAX_VELO_RPM * 6 * 100));
             setVelocity(0x142,(int32_t)(cos(heading_rad)*MAX_VELO_RPM * 6 * 100));
           }
 
-          else if (currentProfile == MOTOR_1_CONSTANT) {
+          else if (currentProfile == MOTOR_2D) {
             setVelocity(0x141,MAX_VELO_RPM * 6 * 100);
             setVelocity(0x142,0);  
           }
 
-          else if (currentProfile == MOTOR_BOTH_CONSTANT) {
+          else if (currentProfile == MOTOR_3D) {
             setVelocity(0x141,MAX_VELO_RPM * 6 * 100);
             setVelocity(0x142,MAX_VELO_RPM * 6 * 100);  
+          }
+
+          else if (currentProfile == MOTOR_IRRATIONAL) {
+            heading += (random(65536)/65536.0) * ANGLE_OF_ATTACK - (ANGLE_OF_ATTACK/2);
+            double heading_rad = atan2(3.14159265358979,exp(1));
+            setVelocity(0x141,(int32_t)(sin(heading_rad)*MAX_VELO_RPM * 6 * 100));
+            setVelocity(0x142,(int32_t)(cos(heading_rad)*MAX_VELO_RPM * 6 * 100));
           }
           // printMotor(motorA,'a');
           // printMotor(motorB,'b');
