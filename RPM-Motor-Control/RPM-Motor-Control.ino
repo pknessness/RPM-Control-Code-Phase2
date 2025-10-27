@@ -28,15 +28,18 @@
 
 #define DT_CYCLES DT_MS/TIMING_CYCLE
 
+#define CYCLOIDAL_TIME_PER_ROTATION 600000L
+
 enum MotorProfile{
   MOTOR_BOTH_OFF, 
   MOTOR_SIMPLIFIED_RANDOM, 
   MOTOR_2D, 
   MOTOR_3D,
-  MOTOR_IRRATIONAL
+  MOTOR_IRRATIONAL,
+  MOTOR_CYCLOIDAL
 }; 
 
-MotorProfile currentProfile = MOTOR_SIMPLIFIED_RANDOM;
+MotorProfile currentProfile = MOTOR_CYCLOIDAL;
 
 void setMotorProfile(MotorProfile profile);
 
@@ -52,7 +55,7 @@ struct Motor {
   int16_t encoderOffset;
 };
 
-void printMotor(Motor m, char c = '?');
+// void printMotor(Motor m, char c = '?');
 void setVelocity(uint16_t canID, int32_t velocity_dps_hundreth);
 void setAngle(uint16_t canID, int16_t velocity_dps, int16_t angle_deg_hundreth);
 
@@ -70,6 +73,8 @@ Motor motorB;
 Motor motors[2] = {motorA, motorB};
 
 double heading = 0;
+
+double velo_angle = 0;
 
 // String inst;
 
@@ -132,6 +137,9 @@ void loop() {
           break;
         case '4':
           setMotorProfile(MOTOR_IRRATIONAL);
+          break;
+        case '5':
+          setMotorProfile(MOTOR_CYCLOIDAL);
           break;
         default :
           setMotorProfile(currentProfile);
@@ -196,7 +204,19 @@ void loop() {
   }else if(cyclePosition > COMMAND_TIMING && cyclePosition <= COMMAND_TIMING + TIMING_TOLERANCE){
     if(!commandSent){
       if(mode == 'a'){
-        if(commandLoop > DT_CYCLES){
+        if (currentProfile == MOTOR_CYCLOIDAL) {
+          long elapsed_time_ms = millis();
+          long curr_cycle_time = elapsed_time_ms % CYCLOIDAL_TIME_PER_ROTATION;
+          velo_angle = 2 * PI * (float)(curr_cycle_time) / CYCLOIDAL_TIME_PER_ROTATION + PI;
+          double velo_angle_rad = velo_angle * 3.14159 / 180;
+          // Serial.print((int32_t)(sin(velo_angle_rad) * MAX_VELO_RPM * 6 * 100));
+          // Serial.print("=");
+          Serial.println((int32_t)(cos(velo_angle_rad) * MAX_VELO_RPM * 6 * 100));
+          setVelocity(0x141,(int32_t)(sin(velo_angle_rad) * MAX_VELO_RPM * 6 * 100));
+          setVelocity(0x142,(int32_t)(cos(velo_angle_rad) * MAX_VELO_RPM * 6 * 100));
+        }
+
+        else if(commandLoop > DT_CYCLES){
           // off by default
           if (currentProfile == MOTOR_BOTH_OFF) {
             setVelocity(0x141,0);
@@ -205,7 +225,7 @@ void loop() {
           else if (currentProfile == MOTOR_SIMPLIFIED_RANDOM) {
             heading += (random(65536)/65536.0) * ANGLE_OF_ATTACK - (ANGLE_OF_ATTACK/2);
             double heading_rad = heading * 3.14159 / 180;
-            setVelocity(0x141,(int32_t)(sin(heading_rad)*MAX_VELO_RPM * 6 * 100));
+            setVelocity(0x141,(int32_t)(sin(heading_rad)*MAX_VELO_RPM * 6 * 100*2));
             setVelocity(0x142,(int32_t)(cos(heading_rad)*MAX_VELO_RPM * 6 * 100));
           }
 
@@ -215,6 +235,9 @@ void loop() {
           }
 
           else if (currentProfile == MOTOR_3D) {
+            Serial.print(MAX_VELO_RPM * 6 * 100);
+            Serial.print("=");
+            Serial.print(MAX_VELO_RPM * 6 * 100);
             setVelocity(0x141,MAX_VELO_RPM * 6 * 100);
             setVelocity(0x142,MAX_VELO_RPM * 6 * 100);  
           }
