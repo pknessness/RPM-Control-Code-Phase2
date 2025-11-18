@@ -39,7 +39,7 @@ enum MotorProfile{
   MOTOR_CYCLOIDAL
 }; 
 
-MotorProfile currentProfile = MOTOR_CYCLOIDAL;
+MotorProfile currentProfile = MOTOR_SIMPLIFIED_RANDOM;
 
 void setMotorProfile(MotorProfile profile);
 
@@ -209,8 +209,8 @@ void loop() {
           long curr_cycle_time = elapsed_time_ms % CYCLOIDAL_TIME_PER_ROTATION;
           velo_angle = 2 * PI * (float)(curr_cycle_time) / CYCLOIDAL_TIME_PER_ROTATION + PI;
           double velo_angle_rad = velo_angle * 3.14159 / 180;
-          // Serial.print((int32_t)(sin(velo_angle_rad) * MAX_VELO_RPM * 6 * 100));
-          // Serial.print("=");
+          Serial.print((int32_t)(sin(velo_angle_rad) * MAX_VELO_RPM * 6 * 100));
+          Serial.print("=");
           Serial.println((int32_t)(cos(velo_angle_rad) * MAX_VELO_RPM * 6 * 100));
           setVelocity(0x141,(int32_t)(sin(velo_angle_rad) * MAX_VELO_RPM * 6 * 100));
           setVelocity(0x142,(int32_t)(cos(velo_angle_rad) * MAX_VELO_RPM * 6 * 100));
@@ -225,7 +225,10 @@ void loop() {
           else if (currentProfile == MOTOR_SIMPLIFIED_RANDOM) {
             heading += (random(65536)/65536.0) * ANGLE_OF_ATTACK - (ANGLE_OF_ATTACK/2);
             double heading_rad = heading * 3.14159 / 180;
-            setVelocity(0x141,(int32_t)(sin(heading_rad)*MAX_VELO_RPM * 6 * 100*2));
+            Serial.print((int32_t)(sin(heading_rad)*MAX_VELO_RPM * 6 * 100));
+            Serial.print("=");
+            Serial.println((int32_t)(cos(heading_rad)*MAX_VELO_RPM * 6 * 100));
+            setVelocity(0x141,(int32_t)(sin(heading_rad)*MAX_VELO_RPM * 6 * 100));
             setVelocity(0x142,(int32_t)(cos(heading_rad)*MAX_VELO_RPM * 6 * 100));
           }
 
