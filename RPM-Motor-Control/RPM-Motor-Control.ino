@@ -1564,6 +1564,7 @@ void setup() {
 }
 
 void loop() {
+  getFeedback();
   long time = millis();
   int cyclePosition = time%TIMING_CYCLE;
 
@@ -1901,8 +1902,6 @@ void loop() {
     querySent = 0;
     printSent = 0;
   }
-
-  getFeedback();
 }
 
 
